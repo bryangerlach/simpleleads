@@ -1,0 +1,16 @@
+services:
+  web:
+    image: bryangerlach/simpleleads:latest
+    restart: unless-stopped
+    environment:
+      SECRET_KEY: "%qufh2ea8!-$%_ctzw=in*d2__i#s*3_mph82!+(3m9g*!%@tt"
+      CSRF_TRUSTED_ORIGINS: "http://localhost"
+    ports:
+      - "3003:3003"
+    volumes: 
+      - db-data-simpleleads:/app/db
+    dns:
+      - 8.8.8.8
+
+volumes:
+  db-data-simpleleads:

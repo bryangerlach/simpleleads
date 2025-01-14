@@ -2,8 +2,14 @@
 {% block content %}
 <div class="container">
   <h1>
-  {% if view_type == '??' %}
-    Filtered Leads
+  {% if view_type == 'installed' %}
+    Leads with OGBOOKS installed
+  {% elif view_type == 'trial' %}
+    Leads with a trial period
+  {% elif view_type == 'probable' %}
+    Likely Leads
+  {% elif view_type == 'stale' %}
+    Stale Leads
   {% else %}
     All Leads
   {% endif %}

@@ -1,7 +1,7 @@
 from django.urls import re_path as url
 from leads import views as views
 urlpatterns = [
-    url(r'^(?P<view_type>|all|watch_later|stopped_watching|upcoming||)$', views.home),
+    url(r'^(?P<view_type>|installed|trial|probable|stale||)$', views.home),
     url(r'^add_lead', views.add_lead),
     url(r'^edit_lead', views.edit_lead),
     url(r'^login', views.login_view),

@@ -58,12 +58,16 @@ def home(request, view_type):
     user = User.objects.get(id=user_id)
     time = datetime.now()
     lead_data = user.lead_set.all()
-    if view_type == 'all':
-        flag = False
+    if view_type == 'installed':
+        lead_data = [lead for lead in lead_data if lead.installed]
+    elif view_type == 'trial':
+        lead_data = [lead for lead in lead_data if lead.trial]
+    elif view_type == 'probable':
+        lead_data = [lead for lead in lead_data if lead.probable]
+    elif view_type == 'stale':
+        lead_data = [lead for lead in lead_data if lead.stale]
     else:
-        data = [lead for lead in lead_data]
-        lead_data = data
-        flag = True
+        lead_data = [lead for lead in lead_data]
     return render(request, 'home.html', {'lead_data':lead_data, 'view_type':view_type})
 
 @login_required(login_url='/login')
