@@ -1,0 +1,32 @@
+{% extends "header.html" %}
+{% block content %}
+
+<div style="padding: 20px;">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md15">
+        <div class="layui-card">
+          <div class="layui-card-header">{{ "Add Client" }}</div>
+          <div class="layui-card-body">
+            <form action="/edit_lead" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <input type="hidden" name="id" value="{{id}}">
+                <label for="{{ form.company.id_for_label }}">Company Name: </label> {{ form.company }}<br><br>
+                <label for="{{ form.contact.id_for_label }}">Contact Name: </label> {{ form.contact }}<br><br>
+                <label for="{{ form.date.id_for_label }}">Date: </label> {{ form.date }}<br><br>
+                <label for="{{ form.phone.id_for_label }}">Phone #: </label> {{ form.phone }}<br><br>
+                <label for="{{ form.address.id_for_label }}">Address: </label> {{ form.address }}<br><br>
+                <label for="{{ form.notes.id_for_label }}">Notes: </label> {{ form.notes }}<br><br>
+                <label for="{{ form.installed.id_for_label }}">{{ form.installed }} Software Installed?<br><br>
+                <label for="{{ form.verbal.id_for_label }}">{{ form.verbal }} Verbal Yes?<br><br>
+                <label for="{{ form.invoice.id_for_label }}">{{ form.invoice }} Invoice Sent?<br><br>
+                <label for="{{ form.paid.id_for_label }}">{{ form.paid }} Invoice Paid?<br><br>
+                <label for="{{ form.stale.id_for_label }}">{{ form.stale }} Stale?<br><br>
+                <label for="{{ form.probable.id_for_label }}">{{ form.probable }} Likely Purchase?<br><br>
+                <label for="{{ form.trial.id_for_label }}">{{ form.trial }} Trial Installed/Offered?<br><br>
+                <label for="{{ form.trial_expiration.id_for_label }}">Trial Expiration Date: </label> {{ form.trial_expiration }}<br><br>
+                <button type="submit">Update Lead</button>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
