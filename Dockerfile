@@ -5,6 +5,8 @@ USER user
 
 WORKDIR /app
 
+RUN chown user:user /app/db/sqlite3.db
+
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt \
  && python manage.py migrate
