@@ -1,13 +1,18 @@
-FROM python:3.11
+FROM python:3.13-alpine
+
+RUN adduser -D user
+USER user
 
 WORKDIR /app
 
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt \
+&& python manage.py migrate
+
+ENV PYTHONUNBUFFERED=1
 
 EXPOSE 3003
 
-RUN chmod +x /app/docker-entrypoint.sh
-ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD wget --spider 0.0.0.0:3003
 
-CMD ["gunicorn", "-c", "gunicorn.conf.py", "simpleleads.wsgi:application"]
+CMD ["/home/user/.local/bin/gunicorn", "-c", "gunicorn.conf.py", "simpleleads.wsgi:application"]
